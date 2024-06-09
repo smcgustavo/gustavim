@@ -1,5 +1,10 @@
 {
     "windowGeometry":"1280x720",
-    "menuFont": "monospace 10",
-    "editorFont": "monospace 18"
+    "font" : "Droid Sans Mono",
+    "fontSize" : "10",
+    "editor": {
+        "fontSize": "14",
+        "background" : "#FFFFFF",
+        "foreground" : "#000000"
+    }
 }
