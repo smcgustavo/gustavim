@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import scrolledtext
-from tkinter import filedialog
+import file
 import json
 
 def readJson():
@@ -28,12 +28,12 @@ def makeButtonsAndLabels(window, frm):
 def makeMenu(window, frm, config, text):
     menubar = Menu(frm, font=(config['font'], config['fontSize']))
     fileMenu = Menu(menubar, font=(config['font'], config['fontSize'])) 
-    fileMenu.add_command(label="New")
-    fileMenu.add_command(label="Open")
-    fileMenu.add_command(label="Save", command= lambda:saveFile(text))
-    fileMenu.add_command(label="Quit", command=window.destroy)
+    fileMenu.add_command(label="New", command= lambda: file.newFile(text))
+    fileMenu.add_command(label="Open", command= lambda: file.openFile(text))
+    fileMenu.add_command(label="Save", command= lambda: file.saveFile(text))
+    fileMenu.add_command(label="Quit", command= window.destroy)
     window.config(menu= menubar)
-    menubar.add_cascade(label="Arquivo",menu=fileMenu)
+    menubar.add_cascade(label="Files",menu=fileMenu)
     
 def makeText(window, config):
     text = scrolledtext.ScrolledText(
@@ -45,15 +45,6 @@ def makeText(window, config):
     )
     text.pack(expand= True, fill = 'both')
     return text
-
-def saveFile(text_area):
-    filePath = filedialog.asksaveasfilename()
-    
-    if filePath != '':
-        string = text_area.get("1.0", END)
-        with open(filePath, "w") as f:
-            f.write(string)
-            f.close()
     
 def initEditor():
     config = readJson()
